@@ -1,36 +1,23 @@
 #include "main.h"
+
 /**
- * jack_bauer - Print every minute of the day
- * Description: The day of jack bauer
+ * jack_bauer - prints time table in this format: HH:MM
+ * Return: the sum of two numbers.
  */
 void jack_bauer(void)
 {
-	int n;
-	int x;
-	int y;
-	int z;
-	int val;
+	int h, m;
 
-	for (n = '0'; n <= '2'; n++)
+	for (h = 0; h < 24; h++)
 	{
-		for (x = '0'; x <= '9'; x++)
+		for (m = 0; m < 60; m++)
 		{
-			val++;
-			for (y = '0'; y <= '5'; y++)
-			{
-				for (z = '0'; z <= '9'; z++)
-				{
-					if (val <= 24)
-					{
-						_putchar(n);
-						_putchar(x);
-						_putchar(':');
-						_putchar(y);
-						_putchar(z);
-						_putchar('\n');
-					}
-				}
-			}
+			_putchar((h / 10) + '0');
+			_putchar((h % 10) + '0');
+			_putchar(':');
+			_putchar((m / 10) + '0');
+			_putchar((m % 10) + '0');
+			_putchar('\n');
 		}
 	}
 }
