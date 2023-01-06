@@ -1,1 +1,1 @@
-My first Readme
+the root of the folder of the project is mandatory
