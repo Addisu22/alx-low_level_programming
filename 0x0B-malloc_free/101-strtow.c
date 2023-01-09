@@ -1,73 +1,45 @@
+include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 /**
- * strtow - char
- * @str: pointer to string params
- * Return: char
+ * str_concat - get ends of input and add together for size
+ * @s1: input one to concat
+ * @s2: input two to concat
+ * Return: concat of s1 and s2
  */
-char **strtow(char *str)
+char *str_concat(char *s1, char *s2)
 {
-int i = 0, j = 0, k = 0;
-int len = 0, count = 0;
-char **f, *col;
-if (!str || !*str)
-{
-return (NULL);
-}
-while (*(str + i))
-{
-if (*(str + i) != ' ')
-{
-if (*(str + i + 1) == ' ' || *(str + i + 1) == 0)
-{
-count += 1;
-}
-}
-i++;
-}
-if (count == 0)
-{
-return (NULL);
-}
-count += 1;
-f = malloc(sizeof(char *) * count);
-if (!f)
-{
-return (NULL);
-}
-i = 0;
-while (*str)
-{
-while (*str == ' ' && *str)
-{
-str++;
-}
-len = 0;
-while (*(str + len) != ' ' && *(str + len))
-{
-len += 1;
-}
-len += 1;
-col = malloc(sizeof(char) * len);
-if (!col)
-{
-for (k = j - 1; k >= 0; k--)
-{
-free(f[k]);
-}
-free(f);
-return (NULL);
-}
-for (k = 0; k < (len - 1);  k++)
-{
-*(col + k) = *(str++);
-}
-*(col + k) = '\0';
-*(f + j) = col;
-if (j < (count - 1))
-{
-j++;
-}
-}
-*(f + j) = NULL;
-return (f);
+	int end1, end2, i = 0;
+	char *array;
+
+	if (s1 == NULL || s2 == NULL)
+		s1 = s2 = "";
+
+	for (end1 = 0; end1 <= *s1; end1++)
+	{
+	}
+
+	for (end2 = 0; end2 <= *s2; end2++)
+	{
+	}
+
+	array = malloc(sizeof(char) * (end1 + end2 + 1));
+
+	if (array == NULL)
+		return (NULL);
+
+	while (*s1)
+	{
+		array[i] = *s1;
+		i++;
+		s1++;
+	}
+
+	while (*s2)
+	{
+		array[i] = *s2;
+		i++;
+		s2++;
+	}
+	return (array);
 }
