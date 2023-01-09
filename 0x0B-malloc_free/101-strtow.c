@@ -1,45 +1,86 @@
-include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
+
 /**
- * str_concat - get ends of input and add together for size
- * @s1: input one to concat
- * @s2: input two to concat
- * Return: concat of s1 and s2
+ * wordCount - counts the number of words within a string.
+ * @str: the input string.
+ *
+ * Return: the number of words.
  */
-char *str_concat(char *s1, char *s2)
+
+int wordCount(char *str)
 {
-	int end1, end2, i = 0;
-	char *array;
+	int flag = 0, wc = 0;
+	int idx;
 
-	if (s1 == NULL || s2 == NULL)
-		s1 = s2 = "";
+	for (idx = 0; str[idx]; idx++)
+		if (str[idx] == ' ')
+			flag = 0;
+		else if (flag == 0)
+		{
+			flag = 1;
+			wc++;
+		}
+	return (wc);
+}
 
-	for (end1 = 0; end1 <= *s1; end1++)
-	{
-	}
+/**
+ * wordLen - counts the number of letters of the word
+ * @wd: the word.
+ *
+ * Return: the number of letters.
+ */
 
-	for (end2 = 0; end2 <= *s2; end2++)
-	{
-	}
+int wordLen(char *wd)
+{
+	int idx = 0;
 
-	array = malloc(sizeof(char) * (end1 + end2 + 1));
+	while (*(wd + idx) && *(wd + idx) != ' ')
+		idx++;
 
-	if (array == NULL)
+	return (idx);
+}
+
+
+/**
+ * strtow - splits a string into words
+ * @str: string of words to be split
+ *
+ * Return: double pointer to strings
+ */
+
+char **strtow(char *str)
+{
+	char **ptr;
+	int idx = 0;
+	int ldx, nw, wl, wdx;
+
+	nw = wordCount(str);
+	if (*str == '\0' || str == NULL || nw == 0)
 		return (NULL);
 
-	while (*s1)
-	{
-		array[i] = *s1;
-		i++;
-		s1++;
-	}
+	ptr = malloc((nw + 1) * sizeof(char *));
+	if (ptr == NULL)
+		return (NULL);
 
-	while (*s2)
+	for (wdx = 0; wdx < nw; wdx++)
 	{
-		array[i] = *s2;
-		i++;
-		s2++;
+		while (str[idx] == ' ')
+			idx++;
+
+		wl = wordLen(str + idx);
+		ptr[wdx] = malloc((wl + 1) * sizeof(char));
+		if (ptr[wdx] == NULL)
+		{
+			while (wdx--)
+				free(ptr[wdx]);
+			free(ptr);
+			return (NULL);
+		}
+		for (ldx = 0; ldx < wl; ldx++, idx++)
+			ptr[wdx][ldx] = str[idx];
+		ptr[wdx][ldx] = '\0';
 	}
-	return (array);
+	ptr[wdx] = NULL;
+
+	return (ptr);
 }
